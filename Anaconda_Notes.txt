@@ -1,0 +1,96 @@
+(Ana)Conda Notes
+User guide: https://docs.anaconda.com/anaconda/user-guide/
+
+Windows:
+Launch Anaconda Prompt (not powershell)
+Should get base environment on windows
+Unix-like termnial commands on windows
+MacOS/linux: launch a terminal
+
+What is an environment? A collection of packages and a python executable that uses the defined packages. We want to specify the how our code sees the rest of your machine's software - environment is a good word for it.
+Advantages: 
+
+packages have many versions, are often are built on top of other packages. Fixing package versions is easiest if we can download and install a collection of packages and freze them.
+Different projects have different requirements - we need different package versions for different projects
+Can be installed anywhere in your directory
+Easy to install or uninstall pacakges
+
+Disadvantages:
+Can install similar versions of large packages, requireing large amounts of memory/storage
+Can be installed anywhere in your directory
+Cannot usually be ported between operating systems, need to be rebuilt on each machine
+
+Why Anaconda for environments? 
+Anaconda provides a package manager and an environment manager. Previously, this took Pip package manager and Virtualenv environment manager. 
+
+let's create a conda environment 
+
+>>>conda create -n testenv
+
+Let's check the installed environments
+
+>>>conda info --envs
+
+Detailed info about the environment 
+
+>>>conda info 
+
+remove an environment
+
+>>>conda remove -n testenv --all
+
+--all removes all packages
+
+We can specify all versions of python3
+python=3.8 
+Will get latest version meeting search specifications
+
+Packages are specified the same way
+numpy=1.18
+note no spaces
+
+We'll get some output telling us waht will be downloaded and what will be installed from external vs anaconda
+SHA256 and MD5 checksums for packages are availible at repo.anaconda.com/path/to/repo
+
+Note that most math packages (scipy, sklearn and numpy) are built on top of intel-MKL - the Math Kernel Library, where the fast math lives.
+
+Adding packages is as easy as
+
+conda install newpackage newpackage2
+>>>conda install pytest scipy
+
+pytest is a test running and management module.
+We can activate an environment with
+
+>>>conda activate testenv
+
+and deactivate with 
+
+>>>conda deactivate
+
+We can see the packages we just installed - there are a lot of dependencies
+
+>>>conda info
+
+We can update packages with 
+
+>>>conda update pkgname
+>>>conda update numpy
+
+We will get a message if no error is found
+or we can install in a different environment by specifying the -n flag
+
+>>>conda -n envname update pkgname
+
+We can open a python command line from inside our environment testenv.
+We first need to exit and re-launch our base environment before using it
+This is only an issue the first time we create an environment
+
+>>>conda deactivate
+>>>conda deactivate
+>>>conda activate base
+>>>conda activate testenv
+
+and now we can launch a python3 environment with 3.8.2 as installed
+
+>>>python
